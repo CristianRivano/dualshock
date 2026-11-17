@@ -64,6 +64,12 @@ export function lang_init(appState, handleLanguageChangeCb, welcomeModalCb) {
       lang_translate(ljson["file"], nlang, ljson["direction"]).catch(error => {
         console.error("Failed to load initial language:", error);
       });
+    } else {
+      // Default to Spanish when browser language is not supported
+      la("lang_init", {"l": "es_es"});
+      lang_translate("es_es.json", "es_es", "ltr").catch(error => {
+        console.error("Failed to load default language:", error);
+      });
     }
   }
   
